@@ -11,7 +11,9 @@ export class AppComponent implements OnInit {
   title: String = 'app works!';
   hand: Array<Card> = [];
   decks = 1;
+  small = false;
   handSize: number;
+  maxHandSize: number;
   errors: Array<string> = [];
   allowedSuits = {
     'Spades': true,
@@ -21,7 +23,8 @@ export class AppComponent implements OnInit {
   };
   minimumValue = 1;
   maximumValue = 13;
-  deck: Array<Card> = [
+  deck = [];
+  standardDeck: Array<Card> = [
     {
       suit: 'Spades',
       value: 1
@@ -232,34 +235,43 @@ export class AppComponent implements OnInit {
     }
   ];
 
-  get maxHandSize() {
-    return this.decks * 52;
-  }
-
   drawHand(): Array<Card> {
-    this.shuffleDeck();
-    return this.filterHand();
+    this.deck = this.initializeDeck();
+    const shuffledDeck = this.shuffleDeck(this.deck);
+    const hand = this.filterCards(shuffledDeck);
+    return hand;
   }
 
-  shuffleDeck(): void {
-    let j, x, i;
-    const cards = this.deck;
-    for (i = cards.length - 1; i > 0; i--) {
-      j = Math.floor(Math.random() * (i + 1));
-      x = cards[i];
-      cards[i] = cards[j];
-      cards[j] = x;
+  initializeDeck(): Array<Card> {
+    let deck = [];
+    console.log(this.decks);
+    for (let i = 0; i < this.decks; i++) {
+      console.log('adding deck');
+      deck = deck.concat(this.standardDeck);
     }
-    this.deck = cards;
+    this.maxHandSize = deck.length;
+    return deck;
   }
 
-  filterHand(): Array<Card> {
+  shuffleDeck(cards: Array<Card>): Array<Card> {
+    let j, x, i;
+    const shuffledCards = cards;
+    for (i = shuffledCards.length - 1; i > 0; i--) {
+      j = Math.floor(Math.random() * (i + 1));
+      x = shuffledCards[i];
+      shuffledCards[i] = shuffledCards[j];
+      shuffledCards[j] = x;
+    }
+    return shuffledCards;
+  }
+
+  filterCards(cards: Array<Card>): Array<Card> {
     this.errors = [];
-    const hand = this.deck;
-    const suitFilteredHand = this.filterBySuit(hand);
+    const suitFilteredHand = this.filterBySuit(cards);
     const valueFilteredHand = this.filterByValue(suitFilteredHand);
     const sizeFilteredHand = this.filterBySize(valueFilteredHand);
-    return this.organizeCards(sizeFilteredHand);
+    const organizedCards = this.organizeCards(sizeFilteredHand);
+    return organizedCards;
   }
 
   filterBySize(cards: Array<Card>): Array<Card> {
@@ -324,9 +336,16 @@ export class AppComponent implements OnInit {
 
   onClickDraw(): void {
     this.hand = this.drawHand();
+    if (this.hand.length > 30) {
+      this.small = true;
+    } else {
+      this.small = false;
+    }
   }
 
   ngOnInit() {
+    this.deck = this.standardDeck;
+    this.maxHandSize = this.deck.length;
     this.handSize = this.maxHandSize;
   }
 }

@@ -8,6 +8,7 @@ import Card from 'app/models/card';
 })
 export class CardComponent implements OnInit {
   @Input() card: Card;
+  @Input() small: boolean;
   valueKey = {
     1: 'A',
     11: 'J',

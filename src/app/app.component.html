@@ -2,11 +2,15 @@
   <div class="controls">
     <h1>Controls</h1>
     <button (click)="onClickDraw()">Draw</button>
+    <div class="decks">
+      <h2>Number of Decks</h2>
+      <input type="number" min="1" [(ngModel)]="decks">
+    </div>
   </div>
   <div class="hand">
     <h1>Hand</h1>
     <div class="cards">
-      <app-card *ngFor="let card of hand" [card]="card"></app-card>
+      <app-card *ngFor="let card of hand" [card]="card" [small]="small"></app-card>
     </div>
   </div>
   <div class="filters">
@@ -17,7 +21,7 @@
         <input type="number" min="0" [max]="maxHandSize" [(ngModel)]="handSize">
       </div>
       <div>
-        <h2>Allow suit</h2>
+        <h2>Allowed suits</h2>
         <div>
           <input id="spades" type="checkbox" [(ngModel)]="allowedSuits.Spades">
           <label for="spades">Spades</label>

@@ -14,6 +14,10 @@
   text-align: center;
 }
 
+.decks {
+  text-align: left;
+}
+
 .controls {
   display: flex;
   flex-direction: column;

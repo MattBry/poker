@@ -1,5 +1,5 @@
-<div class="card" [ngClass]="{'red': card.suit === 'Hearts' || card.suit==='Diamonds'}">
-  <div class="pips-top">
+<div class="card" [ngClass]="{'red': card.suit === 'Hearts' || card.suit==='Diamonds', 'small': small}">
+  <div *ngIf="!small" class="pips">
     <div>
       <p>{{value}}</p>
       <p class="suit">{{suit}}</p>
@@ -10,7 +10,7 @@
       <p>{{value + suit}}</p>
     </div>
   </div>
-  <div class="pips-bottom">
+  <div *ngIf="!small" class="pips bottom">
     <div>
       <p>{{value}}</p>
       <p class="suit">{{suit}}</p>
