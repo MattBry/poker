@@ -1,3 +1,49 @@
-<h1>
-  {{title}}
-</h1>
+<div class="container">
+  <div class="controls">
+    <h1>Controls</h1>
+    <button (click)="onClickDraw()">Draw</button>
+  </div>
+  <div class="hand">
+    <h1>Hand</h1>
+    <div class="cards">
+      <app-card *ngFor="let card of hand" [card]="card"></app-card>
+    </div>
+  </div>
+  <div class="filters">
+    <h1>Filters</h1>
+    <div class="filter-inputs">
+      <div>
+        <h2>Hand size</h2>
+        <input type="number" min="0" [max]="maxHandSize" [(ngModel)]="handSize">
+      </div>
+      <div>
+        <h2>Allow suit</h2>
+        <div>
+          <input id="spades" type="checkbox" [(ngModel)]="allowedSuits.Spades">
+          <label for="spades">Spades</label>
+        </div>
+        <div>
+          <input id="hearts" type="checkbox" [(ngModel)]="allowedSuits.Hearts">
+          <label for="hearts">Hearts</label>
+        </div>
+        <div>
+          <input id="clubs" type="checkbox" [(ngModel)]="allowedSuits.Clubs">
+          <label for="clubs">Clubs</label>
+        </div>
+        <div>
+          <input id="diamonds" type="checkbox" [(ngModel)]="allowedSuits.Diamonds">
+          <label for="diamonds">Diamonds</label>
+        </div>
+      </div>
+      <div>
+        <h2>Minimum value</h2>
+        <input type="number" min="1" [max]="maximumValue" [(ngModel)]="minimumValue">
+      </div>
+      <div>
+        <h2>Maximum value</h2>
+        <input type="number" [min]="minimumValue" max="13" [(ngModel)]="maximumValue">
+      </div>
+      <p *ngFor="let error of errors" class="error">{{error}}</p>
+    </div>
+  </div>
+</div>

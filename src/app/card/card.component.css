@@ -1,0 +1,59 @@
+.card {
+  height: 175px;
+  width: 125px;
+  background: #fff;
+  border: 1px solid #000;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 4px;
+  box-sizing: border-box;
+}
+
+.red {
+  color: red;
+}
+
+p {
+  font-size: 12px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.center {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.center p {
+  font-size: 36px;
+}
+
+.center>div {
+  display: flex;
+}
+
+.suit {
+  font-size: 16px;
+}
+
+.pips-bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  text-align: center;
+}
+
+.pips-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  text-align: center;
+}
+
+.pips-bottom>div {
+  display: flex;
+  flex-direction: column;
+}

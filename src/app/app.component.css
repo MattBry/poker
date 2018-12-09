@@ -1,0 +1,51 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.hand {
+  display: flex;
+  flex: 3;
+  flex-direction: column;
+  background: #9fdf9f;
+  padding: 24px;
+  text-align: center;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 24px;
+  text-align: center;
+}
+
+.error {
+  color: crimson;
+  font-size: 12px;
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 24px;
+  text-align: center;
+}
+
+.cards {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.filter-inputs {
+  text-align: left;
+}
+
+app-card {
+  margin: 2px auto;
+}

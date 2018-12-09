@@ -1,0 +1,19 @@
+<div class="card" [ngClass]="{'red': card.suit === 'Hearts' || card.suit==='Diamonds'}">
+  <div class="pips-top">
+    <div>
+      <p>{{value}}</p>
+      <p class="suit">{{suit}}</p>
+    </div>
+  </div>
+  <div class="center">
+    <div>
+      <p>{{value + suit}}</p>
+    </div>
+  </div>
+  <div class="pips-bottom">
+    <div>
+      <p>{{value}}</p>
+      <p class="suit">{{suit}}</p>
+    </div>
+  </div>
+</div>
