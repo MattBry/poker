@@ -236,25 +236,13 @@ export class AppComponent implements OnInit {
   ];
 
   drawHand(): Array<Card> {
-    this.deck = this.initializeDeck();
     const shuffledDeck = this.shuffleDeck(this.deck);
-    const hand = this.filterCards(shuffledDeck);
+    const hand = this.drawCards(shuffledDeck);
     return hand;
   }
 
-  initializeDeck(): Array<Card> {
-    let deck = [];
-    console.log(this.decks);
-    for (let i = 0; i < this.decks; i++) {
-      console.log('adding deck');
-      deck = deck.concat(this.standardDeck);
-    }
-    this.maxHandSize = deck.length;
-    return deck;
-  }
-
   shuffleDeck(cards: Array<Card>): Array<Card> {
-    let j, x, i;
+    let j, x, i; // JS implementation of Fisher-Yates shuffle taken from SO
     const shuffledCards = cards;
     for (i = shuffledCards.length - 1; i > 0; i--) {
       j = Math.floor(Math.random() * (i + 1));
@@ -265,7 +253,7 @@ export class AppComponent implements OnInit {
     return shuffledCards;
   }
 
-  filterCards(cards: Array<Card>): Array<Card> {
+  drawCards(cards: Array<Card>): Array<Card> {
     this.errors = [];
     const suitFilteredHand = this.filterBySuit(cards);
     const valueFilteredHand = this.filterByValue(suitFilteredHand);
@@ -343,7 +331,19 @@ export class AppComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
+  onDeckNumberChange(event): void {
+    this.maxHandSize = 52 * event.target.value;
+    let deck = [];
+    for (let i = 0; i < this.decks; i++) {
+      deck = deck.concat(this.standardDeck);
+    }
+    this.deck = deck;
+    if (this.handSize > this.deck.length) {
+      this.handSize = this.deck.length;
+    }
+  }
+
+  ngOnInit(): void {
     this.deck = this.standardDeck;
     this.maxHandSize = this.deck.length;
     this.handSize = this.maxHandSize;
